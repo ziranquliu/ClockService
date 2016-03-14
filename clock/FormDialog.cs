@@ -22,6 +22,7 @@ namespace clock
             //this.label1.Text = "您已经连续工作了{0}，该去休息了。\r\n\r\n身体是革命的本钱，请珍惜！";
             //this.label1.Text = msg[0];
             //this.label1.Text = "欢迎使用本软件，" + numericUpDown1.Value + "分钟后提醒";
+            this.textBox1.Text = "您已经连续工作了{0}，该去休息了。\r\n\r\n身体是革命的本钱，请珍惜！";
             this.timer1.Elapsed += Timer1_Elapsed;
         }
         protected override void OnLoad(EventArgs e)
@@ -57,7 +58,7 @@ namespace clock
             TimeSpan ts = (DateTime.Now - LatestTime);
             t += ts.Hours + "小时 ";
             t += ts.Minutes + "分钟";
-            string arg = string.Format("您已经连续工作了{0}，该去休息了。\r\n\r\n身体是革命的本钱，请珍惜！", t);
+            string arg = string.Format(this.textBox1.Text, t);
             LatestTime = DateTime.Now;
 
             try
@@ -100,6 +101,17 @@ namespace clock
         {
             this.Close();
             Application.Exit();
+        }
+
+        private void label1_DoubleClick(object sender, EventArgs e)
+        {
+            this.textBox1.Focus();
+            this.textBox1.BringToFront();
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            this.label1.BringToFront();
         }
     }
 }
